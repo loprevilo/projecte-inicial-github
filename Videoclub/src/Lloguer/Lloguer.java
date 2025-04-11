@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package Lloguer;
+package Alquiler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.time.format.DateTimeParseException;
  */
 
 //LES COSES QUE JA S'HAGIN EXPLICAT EN LES DUES CLASSES ANTERIORS NO ESTARAN COMENTADES EN AQUESTA
-public class Lloguer {
+public class Alquiler {
     private LocalDate data_lloguer;
     private LocalDate data_retorn;
     private int IDclient;
@@ -62,18 +62,18 @@ public class Lloguer {
     }
 
     // Constructor
-    public Lloguer(LocalDate data_lloguer, LocalDate data_retorn, int IDclient, int IDPelicula){
+    public Alquiler(LocalDate data_lloguer, LocalDate data_retorn, int IDclient, int IDPelicula){
         this.data_lloguer = data_lloguer;
         this.data_retorn = data_retorn;
         this.IDclient = IDclient;
         this.IDPelicula = IDPelicula;
         this.IDlloguer = IDLloguer_sequel++;  
     }
-    public Lloguer(){}
+    public Alquiler(){}
 
-    public void registrarLloguer(ArrayList<Lloguer> lloguersArr, ArrayList<Pelicula> PeliculesArr){
+    public void registrarLloguer(ArrayList<Alquiler> lloguersArr, ArrayList<Pelicula> PeliculesArr){
 
-        System.out.print("Introdueix l'ID del client: ");
+        System.out.print("Introdueix l'ID del cliente: ");
         int IDclient = Videoclub.cin.nextInt();
         Videoclub.cin.nextLine(); //Buffer
 
@@ -151,8 +151,8 @@ public class Lloguer {
             }
         }   
         
-        Lloguer lloguer = new Lloguer(data_lloguer, data_retorn, IDclient, idPelicula);
-        lloguersArr.add(lloguer);
+        Alquiler alquiler = new Alquiler(data_lloguer, data_retorn, IDclient, idPelicula);
+        lloguersArr.add(alquiler);
         
             for (Pelicula p : PeliculesArr){
                 if (p.getIDPelicula() == idPelicula){
@@ -163,33 +163,33 @@ public class Lloguer {
                 break;
                 }
             }
-        System.out.println("Lloguer registrat amb exit ID assignat: " + lloguer.getIDlloguer());
+        System.out.println("Alquiler registrat amb exit ID assignat: " + alquiler.getIDlloguer());
     }
     
-    public void eliminarLloguer(ArrayList<Lloguer> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
-        System.out.print("Introdueix l'ID del client per veure els seus lloguers: ");
+    public void eliminarLloguer(ArrayList<Alquiler> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
+        System.out.print("Introdueix l'ID del cliente per veure els seus alquileres: ");
         int clientId = Videoclub.cin.nextInt();
         Videoclub.cin.nextLine(); //Buffer
         
         boolean lloguerEliminat = false;
 
-        System.out.println("Lloguers del client amb l'ID: " + clientId);
+        System.out.println("Alquileres del cliente amb l'ID: " + clientId);
         
-        for (Lloguer l : lloguersArr) {
+        for (Alquiler l : lloguersArr) {
             if (l.getIDclient() == clientId) {
-                System.out.println("ID del lloguer: " + l.getIDlloguer() + " || Pelicula ID: " + l.getIDPelicula() + " || Data lloguer: " + l.getData_lloguer() + " || Data retorn: " + l.getData_retorn());
+                System.out.println("ID del alquiler: " + l.getIDlloguer() + " || Pelicula ID: " + l.getIDPelicula() + " || Data alquiler: " + l.getData_lloguer() + " || Data retorn: " + l.getData_retorn());
             }
         }
 
-        System.out.print("Introdueix l'ID del lloguer que vols eliminar: ");
+        System.out.print("Introdueix l'ID del alquiler que vols eliminar: ");
         int idEliminar = Videoclub.cin.nextInt();
         Videoclub.cin.nextLine(); //Buffer
 
         for (int i = 0; i < lloguersArr.size(); i++) {
-            Lloguer l = lloguersArr.get(i);
+            Alquiler l = lloguersArr.get(i);
             if (l.getIDlloguer() == idEliminar && l.getIDclient() == clientId) {
                 
-                //Després d'eliminar el lloguer es marca la pelicula com a disponible
+                //Després d'eliminar el alquiler es marca la pelicula com a disponible
                 for (Pelicula p : PeliculesArr) {
                     if (p.getIDPelicula() == l.getIDPelicula()) {
                         p.setEstat(true); 
@@ -199,36 +199,36 @@ public class Lloguer {
                 }
             lloguersArr.remove(i);
             lloguerEliminat = true;
-            System.out.println("El lloguer amb l'ID " + idEliminar + " ha sigut eliminat");
+            System.out.println("El alquiler amb l'ID " + idEliminar + " ha sigut eliminat");
             break;
             }
         }
 
         if (!lloguerEliminat) {
-            System.out.println("No s'ha trobat cap lloguer amb l'ID o el client especificat.");
+            System.out.println("No s'ha trobat cap alquiler amb l'ID o el cliente especificat.");
         }
     }
     
-    public void tornarPelicula(ArrayList<Lloguer> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
+    public void tornarPelicula(ArrayList<Alquiler> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
         
-        System.out.print("Introdueix l'ID del client per veure elks seus lloguers: ");
+        System.out.print("Introdueix l'ID del cliente per veure elks seus alquileres: ");
         int clientId = Videoclub.cin.nextInt();
         Videoclub.cin.nextLine(); //Buffer
         
         boolean lloguerTrobat= false;
 
-        System.out.println("Lloguers del client amb l'ID: " + clientId);
-        for (Lloguer l : lloguersArr) {
+        System.out.println("Alquileres del cliente amb l'ID: " + clientId);
+        for (Alquiler l : lloguersArr) {
             if (l.getIDclient() == clientId) {
-                System.out.println("ID del lloguer: " + l.getIDlloguer() + " || Pelicula ID: " + l.getIDPelicula() + " || Data lloguer: " + l.getData_lloguer() + " || Data retorn: " + l.getData_retorn());
+                System.out.println("ID del alquiler: " + l.getIDlloguer() + " || Pelicula ID: " + l.getIDPelicula() + " || Data alquiler: " + l.getData_lloguer() + " || Data retorn: " + l.getData_retorn());
             }
         }
 
-        System.out.print("Introdueix l'ID del lloguer que vols tornar: ");
+        System.out.print("Introdueix l'ID del alquiler que vols tornar: ");
         int idDevolver = Videoclub.cin.nextInt();
         Videoclub.cin.nextLine(); //Buffer
 
-        for (Lloguer l : lloguersArr) {
+        for (Alquiler l : lloguersArr) {
             if (l.getIDlloguer() == idDevolver && l.getIDclient() == clientId) {
                 //Tornar la pelicula, al tornar-la es marca com a disponible altre cop.
                 for (Pelicula p : PeliculesArr) {
@@ -245,32 +245,32 @@ public class Lloguer {
         }
 
         if (!lloguerTrobat) {
-            System.out.println("No s'ha trobat cap lloguer amb l'ID o el client especificat.");
+            System.out.println("No s'ha trobat cap alquiler amb l'ID o el cliente especificat.");
         }
     }
     
-    public void modificarLloguer(ArrayList<Lloguer> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
-        System.out.print("Introduce el ID del cliente para ver sus alquileres: ");
+    public void modificarLloguer(ArrayList<Alquiler> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
+        System.out.print("Introdueix l'ID del cliente per veure els seus alquileres: ");
         int clientId = Videoclub.cin.nextInt();
-        Videoclub.cin.nextLine(); // Limpiar el buffer
+        Videoclub.cin.nextLine(); 
 
         boolean lloguerTrobat = false;
     
-        // Mostrar los alquileres del cliente
-        System.out.println("Alquileres del cliente con ID: " + clientId);
-        for (Lloguer l : lloguersArr) {
+        
+        System.out.println("Alquileres del cliente amb ID: " + clientId);
+        for (Alquiler l : lloguersArr) {
             if (l.getIDclient() == clientId) {
                 // Mostrar cada alquiler
                 System.out.println("ID del alquiler: " + l.getIDlloguer());
             }
         }
 
-        System.out.print("Introduce el ID del alquiler que deseas modificar: ");
+        System.out.print("Introdueix l'ID del alquiler a modificar: ");
         int idModificar = Videoclub.cin.nextInt();
         Videoclub.cin.nextLine(); //Buffer
 
-        for (Lloguer l : lloguersArr) {
-            //Es comprova que l'ID de client i de lloguer coincideixin amb IDs existents.
+        for (Alquiler l : lloguersArr) {
+            //Es comprova que l'ID de cliente i de alquiler coincideixin amb IDs existents.
             if (l.getIDlloguer() == idModificar && l.getIDclient() == clientId) {
                 lloguerTrobat = true;
 
@@ -278,17 +278,17 @@ public class Lloguer {
                 int opcio;
                 do {
                     System.out.println("\n                                           Escull que  vols modificar:");
-                    System.out.println("          || 1. Modificar ID del client || 2. Modificar Data de retorn || 3. Modificar ID de la pelicula || 4. Enrrere ||");
+                    System.out.println("          || 1. Modificar ID del cliente || 2. Modificar Data de retorn || 3. Modificar ID de la pelicula || 4. Enrrere ||");
                     opcio = Videoclub.cin.nextInt();
                     Videoclub.cin.nextLine(); //Buffer 
 
                     switch (opcio) {
                         case 1:
                             
-                            System.out.print("Introdueix un nou ID per al client: ");
+                            System.out.print("Introdueix un nou ID per al cliente: ");
                             int nouIDclient = Videoclub.cin.nextInt();
                             l.setIDclient(nouIDclient);
-                            System.out.println("ID del client modificat a " + nouIDclient);
+                            System.out.println("ID del cliente modificat a " + nouIDclient);
                             break;
 
                         case 2:
@@ -346,17 +346,17 @@ public class Lloguer {
         }
     }
 
-    public void mostrarPeliculesLlogades(ArrayList<Lloguer> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
+    public void mostrarPeliculesLlogades(ArrayList<Alquiler> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
         
-        System.out.print("Introdueix l'ID del client: ");
+        System.out.print("Introdueix l'ID del cliente: ");
         int IDclient = Videoclub.cin.nextInt();
         Videoclub.cin.nextLine(); //Buffer
 
-        //Es comrpova si l'ID del client es vàlid
+        //Es comrpova si l'ID del cliente es vàlid
         boolean clientExistent = false;
-        for (Lloguer lloguer : lloguersArr) {
+        for (Alquiler alquiler : lloguersArr) {
             
-            if (lloguer.getIDclient() == IDclient) {
+            if (alquiler.getIDclient() == IDclient) {
                 clientExistent = true;
                 break;
             }
@@ -367,12 +367,12 @@ public class Lloguer {
             return;
         }
 
-        //Es mostren les pelicules llogades pel client 
+        //Es mostren les pelicules llogades pel cliente 
         boolean tePelicules = false;
-        System.out.println("Pleicules llogades per el client amb l'ID " + IDclient + ":");
+        System.out.println("Pleicules llogades per el cliente amb l'ID " + IDclient + ":");
         
-        for (Lloguer l : lloguersArr) {
-            //Es busquen pelicules associades al ID client solicitat
+        for (Alquiler l : lloguersArr) {
+            //Es busquen pelicules associades al ID cliente solicitat
             if (l.getIDclient() == IDclient) {
              
                 for (Pelicula pelicula : PeliculesArr) {
@@ -386,7 +386,7 @@ public class Lloguer {
             }
         }
         if (!tePelicules) {
-            System.out.println("El client amb l'ID " + IDclient + " no te pelicules llogades.");
+            System.out.println("El cliente amb l'ID " + IDclient + " no te pelicules llogades.");
         }
     }
 
@@ -408,12 +408,12 @@ public class Lloguer {
             System.out.println("No hi ha pelicules disponibles en aquest moment.");
         }
     }
-    public void visualitzarPeliculesNoRetornades(ArrayList<Lloguer> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
+    public void visualitzarPeliculesNoRetornades(ArrayList<Alquiler> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
         System.out.println("-------- Pelicules no retornades --------");
 
         boolean noRetornades = false;
         
-        for (Lloguer l : lloguersArr) {
+        for (Alquiler l : lloguersArr) {
             for (Pelicula p : PeliculesArr) {
                 //Serveix per saber si la pelicula solicitada està llogada (no retornada)
                 if (p.getIDPelicula() == l.getIDPelicula() && !p.getEstat()) { 
@@ -430,11 +430,11 @@ public class Lloguer {
             System.out.println("No hi ha pelicules no retornades en aquest moment.");
         }
     }
-    public void menuLloguer(ArrayList<Lloguer> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
+    public void menuLloguer(ArrayList<Alquiler> lloguersArr, ArrayList<Pelicula> PeliculesArr) {
         int opcio = 0;
         do {
             System.out.println("                                                                      -----------Selecciona una opcio-----------\n");
-            System.out.println("|| 1. Registrar lloguer || 2. Eliminar lloguer || 3. Tornar pelicula || 4. Modificar Lloguer || 5. Mostrar Pelicules LLogades || 6. Visualitzar pelicules disponibles || 7. Visualitzar pelicules no retornades  || 8. Sortir || ");
+            System.out.println("|| 1. Registrar alquiler || 2. Eliminar alquiler || 3. Tornar pelicula || 4. Modificar Alquiler || 5. Mostrar Pelicules LLogades || 6. Visualitzar pelicules disponibles || 7. Visualitzar pelicules no retornades  || 8. Sortir || ");
             opcio = Videoclub.cin.nextInt();
             switch (opcio) {
                 case 1 -> {

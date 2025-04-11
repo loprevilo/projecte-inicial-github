@@ -4,9 +4,9 @@
  */
 package videoclub;
 
-import Client.Client;
+import Cliente.Cliente;
 import Pelicula.Pelicula;
-import Lloguer.Lloguer;
+import Alquiler.Alquiler;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,48 +15,47 @@ import java.util.Scanner;
  * @author polol
  */
 public class Videoclub {
-//serveix per poder utilitzar l'escaner en totes les classes sense tenir la necesitat de declarar-lo diferents vegades
-public static Scanner cin = new Scanner(System.in);  
+    // Sirve para poder utilizar el escáner en todas las clases sin tener la necesidad de declararlo diferentes veces
+    public static Scanner cin = new Scanner(System.in);  
    
-public static void main(String[] args) {
+    public static void main(String[] args) {
         
-        //Aquest bloc serveix per declarar les ArrayList de cada classe i els objectes encarregats de cridar els menus de cada classe
-         ArrayList<Client> ClientsArr = new ArrayList();
-         Client gestorClient = new Client();
-         ArrayList<Pelicula> PeliculesArr = new ArrayList();
-         Pelicula gestorPelicula = new Pelicula();
-         ArrayList<Lloguer> LloguersArr = new ArrayList();
-         Lloguer gestorLloguer = new Lloguer();
-         int opcio = 0;
+        // Este bloque sirve para declarar las ArrayList de cada clase y los objetos encargados de llamar los menús de cada clase
+        ArrayList<Cliente> clientesArr = new ArrayList();
+        Cliente gestorCliente = new Cliente();
+        ArrayList<Pelicula> peliculasArr = new ArrayList();
+        Pelicula gestorPelicula = new Pelicula();
+        ArrayList<Alquiler> alquileresArr = new ArrayList();
+        Alquiler gestorAlquiler = new Alquiler();
+        int opcion = 0;
 
-    do{    
-        System.out.println("               ---------- On vols accedir? ----------");
-        System.out.println("      || 1. Client || 2. Pelicula  || 3. Lloguer || 4. Sortir ||");
-        opcio = Videoclub.cin.nextInt();
-        //Menú principal
-        switch(opcio){
-            
-            case 1 ->{
-                gestorClient.menuClient(ClientsArr);
-                break;
+        do {    
+            System.out.println("               ---------- ¿Dónde quieres acceder? ----------");
+            System.out.println("      || 1. Cliente || 2. Película || 3. Alquiler || 4. Salir ||");
+            opcion = Videoclub.cin.nextInt();
+            // Menú principal
+            switch(opcion) {
+                
+                case 1 -> {
+                    gestorCliente.menuCliente(clientesArr);
+                    break;
+                }
+                case 2 -> {
+                    gestorPelicula.menuPelicula(peliculasArr);
+                    break;
+                }
+                case 3 -> {
+                    gestorAlquiler.menuAlquiler(alquileresArr, peliculasArr);
+                    break;
+                }
+                case 4 -> {
+                    System.out.println("Saliendo");
+                    break;
+                }
+                default -> {
+                    System.out.println("Opción seleccionada no correcta, selecciona una opción válida");
+                }
             }
-            case 2 ->{
-                gestorPelicula.menuPelicula(PeliculesArr);
-                break;
-            }
-            case 3 ->{
-                gestorLloguer.menuLloguer(LloguersArr, PeliculesArr);
-                break;
-            }
-            case 4 ->{
-                System.out.println("Sortint");
-                break;
-            }
-            default ->{
-                System.out.println("Opcio seleccionada no correcta, selecciona una opcio valida");
-            }
-        }
-    }while(opcio != 4);
+        } while(opcion != 4);
+    }
 }
-}
-
