@@ -13,45 +13,45 @@ import videoclub.Videoclub;
  */
 
 public class Pelicula {
-    private String titol;
-    private String genere;
-    private int anyEstrena;
-    private String Descripcio;
+    private String titulo;
+    private String genero;
+    private int anyoEstreno;
+    private String Descripcion;
     private static int IDPelicula_sequel = 0; // Comptador d'ID
     private int IDPelicula;
-    private Boolean estat; // Llogades o no
+    private Boolean estado; // Llogades o no
 
     // Getters y Setters
     public String getTitol() {
-        return titol;
+        return titulo;
     }
 
-    public void setTitol(String titol) {
-        this.titol = titol;
+    public void setTitol(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getGenere() {
-        return genere;
+        return genero;
     }
 
-    public void setGenere(String genere) {
-        this.genere = genere;
+    public void setGenere(String genero) {
+        this.genero = genero;
     }
 
     public int getAnyEstrena() {
-        return anyEstrena;
+        return anyoEstreno;
     }
 
-    public void setAnyEstrena(int anyEstrena) {
-        this.anyEstrena = anyEstrena;
+    public void setAnyEstrena(int anyoEstreno) {
+        this.anyoEstreno = anyoEstreno;
     }
 
     public String getDescripcio() {
-        return Descripcio;
+        return Descripcion;
     }
 
-    public void setDescripcio(String Descripcio) {
-        this.Descripcio = Descripcio;
+    public void setDescripcio(String Descripcion) {
+        this.Descripcion = Descripcion;
     }
 
     public int getIDPelicula() {
@@ -59,24 +59,24 @@ public class Pelicula {
     }
 
     public Boolean getEstat() {
-        return estat;
+        return estado;
     }
 
-    public void setEstat(Boolean estat) {
-        this.estat = estat;
+    public void setEstat(Boolean estado) {
+        this.estado = estado;
     }
 
     
     // Constructor amb paràmetres
-    public Pelicula(String titol, String genere, int anyEstrena, String Descripcio) {
-        this.titol = titol;
-        this.genere = genere;
-        this.anyEstrena = anyEstrena;
-        this.Descripcio = Descripcio;
+    public Pelicula(String titulo, String genero, int anyoEstreno, String Descripcion) {
+        this.titulo = titulo;
+        this.genero = genero;
+        this.anyoEstreno = anyoEstreno;
+        this.Descripcion = Descripcion;
         //Serveix per incrementar l'ID automaticament a l'hora de crear
         this.IDPelicula = IDPelicula_sequel++; 
         //Serveix per indicar que les pel·licules estaràn disponibles per defecte
-        this.estat = true; 
+        this.estado = true; 
     }
 
     // Constructor sense paràmetres (serveix per cridar al menú al main).
@@ -87,20 +87,20 @@ public class Pelicula {
     public void registrarPelicula(ArrayList<Pelicula> PeliculesArr) {
         Videoclub.cin.nextLine(); //Buffer
         
-        System.out.print("Titol de la pelicula: ");
-        String titol = Videoclub.cin.nextLine();
+        System.out.print("Titulo de la pelicula: ");
+        String titulo = Videoclub.cin.nextLine();
         
-        System.out.print("Genere de la pelicula: ");
-        String genere = Videoclub.cin.nextLine();
+        System.out.print("Genero de la pelicula: ");
+        String genero = Videoclub.cin.nextLine();
         
         System.out.print("Any d'estrena: ");
-        int anyEstrena = Videoclub.cin.nextInt();
+        int anyoEstreno = Videoclub.cin.nextInt();
         Videoclub.cin.nextLine(); //Buffer
         
-        System.out.print("Descripcio: ");
-        String descripcio = Videoclub.cin.nextLine();
+        System.out.print("Descripcion: ");
+        String descripcion = Videoclub.cin.nextLine();
         //Afegim la pel·licula registrada al ArrayList.
-        Pelicula novaPelicula = new Pelicula(titol, genere, anyEstrena, descripcio);
+        Pelicula novaPelicula = new Pelicula(titulo, genero, anyoEstreno, descripcion);
         PeliculesArr.add(novaPelicula);
         
         System.out.println("Pelicula registrada amb ID: " + novaPelicula.getIDPelicula());
@@ -121,7 +121,7 @@ public class Pelicula {
                 //si s'ha trovat una pelicula conicident s'elimina la pelicula i es passa el Boolean a treu per verificar la eliminació
                 PeliculesArr.remove(i);
                 peliculaEliminada = true;
-                System.out.println("La pelicula amb ID " + idEliminar + " ha estat eliminada.");
+                System.out.println("La pelicula amb ID " + idEliminar + " ha estado eliminada.");
                 break;
             }
         }
@@ -141,26 +141,26 @@ public class Pelicula {
         for (Pelicula p : PeliculesArr) {
             //Es comprova si l'id introduit coincideix amb un existent
             if (p.getIDPelicula() == idModificar) {
-                int opcio = 0;
+                int opcion = 0;
                 //El seguent do while serveix per poder tornar enrrere
                 do {
                     System.out.println("       Quina dada vols modificar de la pelicula '" + p.getTitol() + "'?\n");
-                    System.out.println("|| 1. Titol || 2. Genere || 3. Any Estrena || 4. Descripcio || 5. Tirar enrere ||\n");
-                    opcio = Videoclub.cin.nextInt();
+                    System.out.println("|| 1. Titulo || 2. Genero || 3. Any Estrena || 4. Descripcion || 5. Tirar enrere ||\n");
+                    opcion = Videoclub.cin.nextInt();
                     Videoclub.cin.nextLine(); //Buffer
                     
-                    switch (opcio) {
+                    switch (opcion) {
                         case 1 -> {
-                            System.out.print("Introdueix el nou titol (L'actual es: " + p.getTitol() + "): ");
+                            System.out.print("Introdueix el nou titulo (L'actual es: " + p.getTitol() + "): ");
                             String nouTitol = Videoclub.cin.nextLine();
                             p.setTitol(nouTitol);
-                            System.out.println("El nou titol es: " + p.getTitol());
+                            System.out.println("El nou titulo es: " + p.getTitol());
                         }
                         case 2 -> {
-                            System.out.print("Introdueix el nou genere (L'actual es: " + p.getGenere() + "): ");
+                            System.out.print("Introdueix el nou genero (L'actual es: " + p.getGenere() + "): ");
                             String nouGenere = Videoclub.cin.nextLine();
                             p.setGenere(nouGenere);
-                            System.out.println("El nou genere es: " + p.getGenere());
+                            System.out.println("El nou genero es: " + p.getGenere());
                         }
                         case 3 -> {
                             System.out.print("Introdueix el nou any d'estrena (L'actual és: " + p.getAnyEstrena() + "): ");
@@ -170,19 +170,19 @@ public class Pelicula {
                             System.out.println("El nou any d'estrena és: " + p.getAnyEstrena());
                         }
                         case 4 -> {
-                            System.out.print("Introdueix la nova descripció (L'actual és: " + p.getDescripcio() + "): ");
+                            System.out.print("Introdueix la nova descripcion (L'actual és: " + p.getDescripcio() + "): ");
                             String novaDescripcio = Videoclub.cin.nextLine();
                             p.setDescripcio(novaDescripcio);
-                            System.out.println("La nova descripció és: " + p.getDescripcio());
+                            System.out.println("La nova descripcion és: " + p.getDescripcio());
                         }
                         case 5 -> {
                             System.out.println("Tornant al menú anterior...");
                         }
                         default -> {
-                            System.out.println("L'opció introduïda no és correcta, escull una vàlida.");
+                            System.out.println("L'opcion introduïda no és correcta, escull una vàlida.");
                         }
                     }
-                } while (opcio != 5);
+                } while (opcion != 5);
                 return;
             }
         }
@@ -191,12 +191,12 @@ public class Pelicula {
 
     //Aquest mètode serveix per utlilitzar els diferents mètodes de Client (amb el format d'un menú).
     public void menuPelicula(ArrayList<Pelicula> PeliculesArr) {
-        int opcio = 0;
+        int opcion = 0;
         do {
-            System.out.println("                            -----------Selecciona una opcio----------- \n");
+            System.out.println("                            -----------Selecciona una opcion----------- \n");
             System.out.println("      || 1. Registrar pelicula || 2. Eliminar pelicula || 3. Modificar pelicula || 4. Enrrere ||      ");
-            opcio = Videoclub.cin.nextInt();
-            switch (opcio) {
+            opcion = Videoclub.cin.nextInt();
+            switch (opcion) {
                 case 1 -> {
                     registrarPelicula(PeliculesArr);
                     break;
@@ -214,9 +214,9 @@ public class Pelicula {
                     break;
                 }
                 default -> {
-                    System.out.println("La opcio seleccionada no es correcte, selecciona una valida.");
+                    System.out.println("La opcion seleccionada no es correcte, selecciona una valida.");
                 }
             }
-        } while (opcio != 4);
+        } while (opcion != 4);
     }
 }
